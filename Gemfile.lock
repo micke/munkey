@@ -1,3 +1,16 @@
+GIT
+  remote: https://github.com/meew0/discordrb.git
+  revision: d229fd118de2cb8cf1733ffc2331ce30a4fc68a6
+  specs:
+    discordrb (3.2.1)
+      discordrb-webhooks (~> 3.2.0.1)
+      opus-ruby
+      rbnacl (~> 3.4.0)
+      rest-client (>= 2.1.0.rc1)
+      websocket-client-simple (>= 0.3.0)
+    discordrb-webhooks (3.2.0.1)
+      rest-client (>= 2.1.0.rc1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -80,14 +93,6 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
-    discordrb (3.2.1)
-      discordrb-webhooks (~> 3.2.0.1)
-      opus-ruby
-      rbnacl (~> 3.4.0)
-      rest-client
-      websocket-client-simple (>= 0.3.0)
-    discordrb-webhooks (3.2.0.1)
-      rest-client
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.4.0)
@@ -139,6 +144,7 @@ GEM
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
+    http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (1.0.1)
@@ -227,7 +233,8 @@ GEM
       ffi (>= 0.5.0, < 2)
     rbnacl (3.4.0)
       ffi
-    rest-client (2.0.2)
+    rest-client (2.1.0.rc1)
+      http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
@@ -306,7 +313,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   concurrent-ruby (~> 1.0)
-  discordrb
+  discordrb!
   dotenv-rails (~> 2.4)
   font-awesome-rails (~> 4.7)
   google-cloud-vision
