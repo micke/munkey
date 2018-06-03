@@ -10,6 +10,7 @@ require_relative "bot/regions"
 require_relative "bot/searches"
 require_relative "bot/group_buys"
 require_relative "bot/image_processing"
+require_relative "bot/channel_crud"
 
 Settings.default :monitoring_enabled, true
 Settings.default :log_channel, nil
@@ -26,6 +27,7 @@ bot.include! Bot::Regions
 bot.include! Bot::Searches
 bot.include! Bot::GroupBuys
 bot.include! Bot::ImageProcessing
+bot.include! Bot::ChannelCrud
 
 bot.command :botlog, Bot::ADMIN_PERMISSIONS do |event|
   Setting.log_channel = event.channel.id

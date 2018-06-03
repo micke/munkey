@@ -23,5 +23,5 @@
           - @server.channels.each do |channel|
             %tr
               %td
-                = link_to channel do
+                = link_to [@server, channel] do
                   = channel.name
