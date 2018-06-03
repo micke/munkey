@@ -1,6 +1,14 @@
 class User < ActiveRecord::Base
   has_many :searches
 
+  def self.upsert!(discord_user)
+    find_or_create_by(
+      id: discord_user.id,
+    ).tap do |user|
+      user.update_with_discord_user(discord_user)
+    end
+  end
+
   def self.add(user)
     create!(id: user.id, name: user.username)
   end
@@ -13,15 +21,13 @@ class User < ActiveRecord::Base
     exists?(id: user.id, blocked: true)
   end
 
-  def self.block(user)
-    find_or_create_by!(id: user.id)
-      .update_with_discord_user(user)
+  def self.block(discord_user)
+    upsert!(discord_user)
       .update!(blocked: true)
   end
 
-  def self.unblock(user)
-    find_or_create_by!(id: user.id)
-      .update_with_discord_user(user)
+  def self.unblock(discord_user)
+    upsert!(discord_user)
       .update!(blocked: false)
   end
 
@@ -31,7 +37,6 @@ class User < ActiveRecord::Base
 
   def update_with_discord_user(user)
     update!(name: user.username)
-    self
   end
 
   def discord
