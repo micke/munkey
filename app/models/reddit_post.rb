@@ -23,7 +23,7 @@ class RedditPost < SimpleDelegator
 
   def to_discord_message(search = nil)
     highlighted_title =
-      search && search.highlighted_query_match(title) ||
+      search&.highlighted_query_match(title) ||
       title.to_s
 
     [
