@@ -1,6 +1,10 @@
 class ImageRecognition
   attr_reader :images
 
+  def self.available?
+    ENV.has_key?("GOOGLE_CLOUD_PROJECT") && ENV.has_key("GOOGLE_CLOUD_KEYFILE_JSON")
+  end
+
   def initialize(images)
     @images = images
   end

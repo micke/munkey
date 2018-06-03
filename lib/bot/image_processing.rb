@@ -6,7 +6,7 @@ module Bot
     extend Discordrb::Commands::CommandContainer
 
     message in: "visa-din-keeb" do |event, *args|
-      next unless ENV["GOOGLE_CLOUD_PROJECT"] && ENV["GOOGLE_CLOUD_KEYFILE_JSON"]
+      next unless ImageRecognition.available?
       images = event.message.all_images
 
       if images.any?
