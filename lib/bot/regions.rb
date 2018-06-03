@@ -18,7 +18,8 @@ module Bot
       next if event.server.regions.exists?(name: name)
       discord_role = event.server.create_role
       discord_role.name = name
-      region = event.server.regions.create!(name: name, discord_id: discord_role.id)
+      region = Region.upsert!(discord_role)
+
 
       "Created region #{region.name}"
     end
@@ -37,17 +38,15 @@ module Bot
       end
     end
 
-    command :renameregion, ADMIN_PERMISSIONS do |event, name, new_name|
-      region = event.server.regions.find_by_name(name)
+    server_role_update do |event|
+      if Region.exists?(event.role.id)
+        Region.upsert!(event.role)
+      end
+    end
 
-      unless region
-        "Region #{name} not found"
-      else
-        discord_role = event.server.role(region.discord_id)
-        discord_role.name = new_name
-        region.update!(name: new_name)
-
-        "Renamed region #{region.name}"
+    server_role_delete do |event|
+      if Region.exists?(event.id)
+        Region.destroy(event.id)
       end
     end
 
