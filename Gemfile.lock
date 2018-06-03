@@ -100,6 +100,8 @@ GEM
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
+    font-awesome-rails (4.7.0.4)
+      railties (>= 3.2, < 6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     google-cloud-core (1.2.0)
@@ -306,6 +308,7 @@ DEPENDENCIES
   concurrent-ruby (~> 1.0)
   discordrb
   dotenv-rails (~> 2.4)
+  font-awesome-rails (~> 4.7)
   google-cloud-vision
   haml (~> 5.0)
   jbuilder (~> 2.5)

@@ -33,6 +33,7 @@ gem "jquery-rails", "~> 4.3.3"
 gem "sass", "~> 3.5"
 gem "haml", "~> 5.0"
 gem "bootstrap", "~> 4.1"
+gem "font-awesome-rails", "~> 4.7"
 
 gem "concurrent-ruby", "~> 1.0"
 

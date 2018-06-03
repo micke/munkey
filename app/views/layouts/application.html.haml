@@ -20,9 +20,13 @@
       #navbarSupportedContent.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
           %li.nav-item
-            = link_to "Servers", servers_path, class: "nav-link"
+            = link_to servers_path, class: "nav-link" do
+              = fa_icon "server"
+              Servers
           %li.nav-item
-            = link_to "Users", users_path, class: "nav-link"
+            = link_to users_path, class: "nav-link" do
+              = fa_icon "users"
+              Users
 
         .btn-group
           .btn-group

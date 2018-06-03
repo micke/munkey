@@ -8,7 +8,9 @@
       %h2= @server.member_count
 
   .btn-group.mb-3
-    = link_to "Update from discord", update_from_discord_server_path(@server), class: ["btn", "btn-primary"]
+    = link_to fa_icon("refresh", text: "Update from discord"),
+      update_from_discord_server_path(@server),
+      class: ["btn", "btn-primary"]
 
   .d-flex.border.rounded.flex-column
     .d-flex.align-items-center.p-3.text-white-50.bg-dark.rounded-top.box-shadow
