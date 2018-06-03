@@ -41,7 +41,7 @@ gem "concurrent-ruby", "~> 1.0"
 # gem "mini_magick", "~> 4.8"
 
 gem "simple-rss"
-gem "discordrb", github: "meew0/discordrb"
+gem "discordrb", github: "lisinge/discordrb", branch: "patch-1"
 gem "pry"
 gem "google-cloud-vision", require: "google/cloud/vision"
 gem "parslet"
