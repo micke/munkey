@@ -11,6 +11,7 @@ require_relative "bot/searches"
 require_relative "bot/group_buys"
 require_relative "bot/image_processing"
 require_relative "bot/channel_crud"
+require_relative "bot/server_crud"
 
 Settings.default :monitoring_enabled, true
 Settings.default :log_channel, nil
@@ -28,12 +29,13 @@ bot.include! Bot::Searches
 bot.include! Bot::GroupBuys
 bot.include! Bot::ImageProcessing
 bot.include! Bot::ChannelCrud
+bot.include! Bot::ServerCrud
 
 bot.command :botlog, Bot::ADMIN_PERMISSIONS do |event|
   Setting.log_channel = event.channel.id
   "Log channel set"
 end
 
-bot.command :pry do |event|
-  binding.pry
+bot.command :link do |event|
+  bot.invite_url
 end
