@@ -24,6 +24,8 @@ class Region < ActiveRecord::Base
   end
 
   def update_from_discord!
+    return unless discord
+
     Region.upsert! discord
   end
 end
