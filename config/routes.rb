@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get :update_from_discord, on: :member
 
     resources :channels
+    resources :regions
   end
 
   resources :users
