@@ -4,6 +4,18 @@ class ServersController < ApplicationController
   end
 
   def show
-    @server = Server.find(params[:id])
+    @server = server
+  end
+
+  def update_from_discord
+    server.update_from_discord!
+
+    redirect_to server
+  end
+
+  private
+
+  def server
+    @server ||= Server.find(params[:id])
   end
 end

@@ -14,6 +14,14 @@ class Server < ActiveRecord::Base
     )
   end
 
+  def update_from_discord!
+    Server.upsert!(discord)
+
+    discord.text_channels.each do |channel|
+      Channel.upsert!(channel)
+    end
+  end
+
   def discord
     @on_discord ||= BOT.servers[id]
   rescue RuntimeError
