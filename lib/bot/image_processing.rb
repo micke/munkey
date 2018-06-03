@@ -21,8 +21,5 @@ module Bot
         description_message.delete
       end
     end
-
-    message in: "bottest" do |event, *args|
-    end
   end
 end
