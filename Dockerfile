@@ -12,4 +12,4 @@ RUN bundle install
 
 COPY . ./
 
-CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
