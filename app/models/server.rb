@@ -1,6 +1,6 @@
 class Server < ActiveRecord::Base
-  has_many :regions
-  has_many :channels
+  has_many :regions, dependent: :destroy
+  has_many :channels, dependent: :destroy
 
   def self.upsert!(discord_server)
     find_or_create_by(id: discord_server.id).tap do |server|
