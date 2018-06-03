@@ -1,0 +1,13 @@
+%table.table.table-striped.table-hover.table-responsive-xl
+  %thead.thead-dark
+    %tr
+      %th{ scope: "col"} Name
+      %th{ scope: "col", style: "width:5%" } Searches
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = link_to user do
+            %img.mr-1.rounded{:alt => "", :height => "20", :width => "20", :src => user.avatar_url}/
+            = user.name
+        %td= user.searches_count

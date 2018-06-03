@@ -1,0 +1,48 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    / Required meta tags
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    / Bootstrap CSS
+    %link{:crossorigin => "anonymous", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css", :integrity => "sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB", :rel => "stylesheet"}/
+    %title Munkey
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.sticky-top.bd-navbar
+      = link_to "Munkey", root_path, class: "navbar-brand"
+      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item
+            = link_to "Servers", servers_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Users", users_path, class: "nav-link"
+
+        .btn-group
+          .btn-group
+            %button.btn.dropdown-toggle#worker{class: MONITORING_TASK.running? ? "btn-success" : "btn-danger", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              Worker
+            .dropdown-menu{ "aria-labelledby": "worker" }
+              - if MONITORING_TASK.running?
+                %a.dropdown-item{ href: stop_monitor_path } Stop
+              - else
+                %a.dropdown-item{ href: run_monitor_path } Start
+              .dropdown-divider
+              %a.dropdown-item{ href: log_monitor_path } Log
+          .btn-group
+            %button.btn.dropdown-toggle#bot{class: BOT.connected? ? "btn-success" : "btn-danger", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              Bot
+            .dropdown-menu{ "aria-labelledby": "bot" }
+              - if BOT.connected?
+                %a.dropdown-item{ href: stop_bot_path } Stop
+              - else
+                %a.dropdown-item{ href: run_bot_path } Start
+              .dropdown-divider
+              %a.dropdown-item{ href: log_bot_path } Log
+    = yield
