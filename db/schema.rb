@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_03_152700) do
+ActiveRecord::Schema.define(version: 2018_06_03_183921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2018_06_03_152700) do
     t.citext "name"
     t.bigint "discord_id"
     t.bigint "server_id"
+    t.string "color"
   end
 
 # Could not dump table "searches" because of following StandardError
