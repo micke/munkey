@@ -20,6 +20,10 @@ class Server < ActiveRecord::Base
     discord.text_channels.each do |channel|
       Channel.upsert!(channel)
     end
+
+    regions.each do |region|
+      region.update_from_discord!
+    end
   end
 
   def discord

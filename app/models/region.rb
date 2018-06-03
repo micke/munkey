@@ -10,10 +10,20 @@ class Region < ActiveRecord::Base
     end
   end
 
+  def discord
+    @on_discord ||= server.discord.role(id)
+  rescue RuntimeError
+    nil
+  end
+
   def update_with_discord_role(discord_role)
     update!(
       name: discord_role.name,
       color: discord_role.color.hex,
     )
+  end
+
+  def update_from_discord!
+    Region.upsert! discord
   end
 end
