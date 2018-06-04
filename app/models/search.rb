@@ -1,7 +1,11 @@
 class Search < ActiveRecord::Base
   belongs_to :user, counter_cache: true
 
-  delegate :name, :discord, to: :user, prefix: true
+  delegate :name, to: :user, prefix: true
+
+  def discord_user
+    user.discord
+  end
 
   def description
     m = (wants? ? "[W] " : "[H] ")
