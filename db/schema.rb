@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_071826) do
+ActiveRecord::Schema.define(version: 2018_06_04_193905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2018_06_04_071826) do
     t.string "name"
     t.datetime "created_at", default: -> { "now()" }, null: false
     t.datetime "updated_at", default: -> { "now()" }, null: false
+    t.integer "channels_count", default: 0, null: false
+    t.integer "regions_count", default: 0, null: false
   end
 
   create_table "settings", force: :cascade do |t|

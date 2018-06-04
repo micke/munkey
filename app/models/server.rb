@@ -32,13 +32,5 @@ class Server < ActiveRecord::Base
     nil
   end
 
-  def channel_count
-    channels.count
-  end
-
-  def region_count
-    regions.count
-  end
-
   delegate :icon_url, :member_count, to: :discord, allow_nil: true
 end

@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  belongs_to :server
+  belongs_to :server, counter_cache: true
 
   default_scope { order("position asc") }
 

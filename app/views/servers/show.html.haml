@@ -1,20 +1,20 @@
 %main.container{:role => "main"}
   .d-flex.align-items-center.p-3.my-3.text-white-50.bg-success.rounded.box-shadow
-    %img.mr-3.rounded{:alt => "", :height => "48", :src => @server.icon_url, :width => "48"}/
+    %img.mr-3.rounded{:alt => "", :height => "48", :src => server.icon_url, :width => "48"}/
     .lh-100
-      %h6.mb-0.text-white.lh-100= @server.name
-      %small Since #{@server.created_at.year}
+      %h6.mb-0.text-white.lh-100= server.name
+      %small Since #{server.created_at.year}
     .ml-auto
-      %h2= @server.member_count
+      %h2= server.member_count
 
   .btn-group.mb-3
     = link_to fa_icon("refresh", text: "Update from discord"),
-      update_from_discord_server_path(@server),
+      update_from_discord_server_path(server),
       class: ["btn", "btn-primary"]
 
   .row
     .col-sm
-      = render partial: "channels", locals: { channels: @server.channels, channel_count: @server.channel_count }
+      = render partial: "channels", locals: { channels: server.channels, channels_count: server.channels_count }
 
     .col-sm
-      = render partial: "regions", locals: { regions: @server.regions, region_count: @server.region_count }
+      = render partial: "regions", locals: { regions: server.regions, regions_count: server.regions_count }
