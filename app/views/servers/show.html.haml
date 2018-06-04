@@ -12,38 +12,41 @@
       update_from_discord_server_path(@server),
       class: ["btn", "btn-primary"]
 
-  .d-flex.border.rounded.flex-column.mb-3
-    .d-flex.align-items-center.p-3.text-white-50.bg-dark.rounded-top.box-shadow
-      .lh-100
-        %h3.mb-0.text-white.lh-100 Channels
-      .ml-auto
-        %h4= @server.channel_count
-    %div
-      %table.table.table-striped.table-hover.table-responsive-xl.m-0
-        %thead.thead-dark
-          %tr
-            %th{ scope: "col" } Name
-        %tbody
-          - @server.channels.each do |channel|
-            %tr
-              %td
-                = link_to [@server, channel] do
-                  = channel.name
+  .row
+    .col-sm
+      .d-flex.border.rounded.flex-column.mb-3
+        .d-flex.align-items-center.p-3.text-white-50.bg-dark.rounded-top.box-shadow
+          .lh-100
+            %h3.mb-0.text-white.lh-100 Channels
+          .ml-auto
+            %h4= @server.channel_count
+        %div
+          %table.table.table-striped.table-hover.m-0
+            %thead.thead-dark
+              %tr
+                %th{ scope: "col" } Name
+            %tbody
+              - @server.channels.each do |channel|
+                %tr
+                  %td
+                    = link_to [@server, channel] do
+                      = channel.name
 
-  .d-flex.border.rounded.flex-column.mb-3
-    .d-flex.align-items-center.p-3.text-white-50.bg-dark.rounded-top.box-shadow
-      .lh-100
-        %h3.mb-0.text-white.lh-100 Regions
-      .ml-auto
-        %h4= @server.region_count
-    %div
-      %table.table.table-striped.table-hover.table-responsive-xl.m-0
-        %thead.thead-dark
-          %tr
-            %th{ scope: "col" } Name
-        %tbody
-          - @server.regions.each do |region|
-            %tr
-              %td
-                %a{ href: polymorphic_path([@server, region]), style: "color: ##{region.color}" }
-                  = region.name
+    .col-sm
+      .d-flex.border.rounded.flex-column.mb-3
+        .d-flex.align-items-center.p-3.text-white-50.bg-dark.rounded-top.box-shadow
+          .lh-100
+            %h3.mb-0.text-white.lh-100 Regions
+          .ml-auto
+            %h4= @server.region_count
+        %div
+          %table.table.table-striped.table-hover.m-0
+            %thead.thead-dark
+              %tr
+                %th{ scope: "col" } Name
+            %tbody
+              - @server.regions.each do |region|
+                %tr
+                  %td
+                    %a{ href: polymorphic_path([@server, region]), style: "color: ##{region.color}" }
+                      = region.name
