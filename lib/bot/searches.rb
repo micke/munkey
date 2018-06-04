@@ -23,10 +23,6 @@ module Bot
       "Monitoring disabled"
     end
 
-    command :invite, Bot::ADMIN_PERMISSIONS do |event|
-      event.invite_url
-    end
-
     command :block, Bot::ADMIN_PERMISSIONS.merge(min_args: 1) do |event, user|
       parsed_user = event.bot.parse_mention(user)
       User.block(parsed_user)
