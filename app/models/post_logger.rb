@@ -17,16 +17,16 @@ class PostLogger
     logger.error(error.parse_failure_cause.ascii_tree)
   end
 
-  private
-
-  attr_reader :post, :logger, :bot
-
   %i(debug info warn error fatal).each do |level|
     define_method level do |message|
       logger.public_send(level, message)
       log_to_discord(message)
     end
   end
+
+  private
+
+  attr_reader :logger, :bot
 
   def log_to_discord(message)
     bot.send_message(Settings.log_channel, message) if Settings.log_channel
