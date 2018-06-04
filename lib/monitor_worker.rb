@@ -27,7 +27,7 @@ class MonitorWorker
 
           searches.each do |search|
             logger.match(post, search)
-            search.discord_user.pm.send_message(*post.to_discord_message(search))
+            search.discord_user.send_message(*post.to_discord_message(search))
           end
         end
       rescue Parslet::ParseFailed => error

@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   has_many :searches
 
+  delegate :avatar_url, :pm, to: :discord, allow_nil: true
+
+  alias_method :send_mesasge, :pm
+
   def self.upsert!(discord_user)
     find_or_create_by(
       id: discord_user.id,
@@ -44,6 +48,4 @@ class User < ActiveRecord::Base
   rescue RuntimeError
     nil
   end
-
-  delegate :avatar_url, to: :discord, allow_nil: true
 end
