@@ -10,33 +10,29 @@ class MonitorWorker
   end
 
   def work!
-    begin
-      new = tracker.add_and_return_new(fetch_posts)
+    new = tracker.add_and_return_new(fetch_posts)
 
-      new.each do |post|
-        begin
-          logger.new(post)
+    new.each do |post|
+      begin
+        logger.new(post)
 
-          if Settings.monitoring_enabled
-            if post.gb?
-              Channel.receiving_gb_alerts.each do |channel|
-                bot.send_message(channel.id, *post.to_discord_message)
-              end
-            end
-
-            searches = Search.matching(post.title, post.submitter)
-
-            searches.each do |search|
-              logger.match(post, search)
-              search.discord_user.pm.send_message(*post.to_discord_message(search))
+        if Settings.monitoring_enabled
+          if post.gb?
+            Channel.receiving_gb_alerts.each do |channel|
+              bot.send_message(channel.id, *post.to_discord_message)
             end
           end
-        rescue Parslet::ParseFailed => error
-          logger.parser_error(post, error)
+
+          searches = Search.matching(post.title, post.submitter)
+
+          searches.each do |search|
+            logger.match(post, search)
+            search.discord_user.pm.send_message(*post.to_discord_message(search))
+          end
         end
+      rescue Parslet::ParseFailed => error
+        logger.parser_error(post, error)
       end
-    rescue => e
-      logger.error e
     end
   end
 
