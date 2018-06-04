@@ -1,0 +1,17 @@
+.d-flex.border.rounded.flex-column.mb-3
+  .d-flex.align-items-center.p-3.text-white-50.bg-dark.rounded-top.box-shadow
+    .lh-100
+      %h3.mb-0.text-white.lh-100 Regions
+    .ml-auto
+      %h4= region_count
+  %div
+    %table.table.table-striped.table-hover.m-0
+      %thead.thead-dark
+        %tr
+          %th{ scope: "col" } Name
+      %tbody
+        - regions.each do |region|
+          %tr
+            %td
+              %a{ href: polymorphic_path([@server, region]), style: "color: ##{region.color}" }
+                = region.name
