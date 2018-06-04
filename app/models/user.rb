@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def discord
-    @on_discord ||= BOT.users[id]
+    @on_discord ||= BOT.user(id)
   rescue RuntimeError
     nil
   end
