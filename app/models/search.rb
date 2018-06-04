@@ -1,6 +1,8 @@
 class Search < ActiveRecord::Base
   belongs_to :user
 
+  delegate :name, to: :user, prefix: true
+
   def description
     m = (wants? ? "[W] " : "[H] ")
     m += query.present? && "`#{query}`" || "**anything**"

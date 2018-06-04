@@ -5,7 +5,7 @@ class MonitorWorker
 
   def initialize(bot, logger)
     @bot = bot
-    @logger = logger
+    @logger = PostLogger.new(logger, bot)
     @tracker = ItemTracker.new(fetch_posts)
   end
 
@@ -15,8 +15,7 @@ class MonitorWorker
 
       new.each do |post|
         begin
-          logger.info("NEW: #{post.updated} #{post.id} #{post.title}")
-          bot.send_message(Settings.log_channel, "NEW: #{post.updated} #{post.id} #{post.title}") if Settings.log_channel
+          logger.new(post)
 
           if Settings.monitoring_enabled
             if post.gb?
@@ -29,14 +28,12 @@ class MonitorWorker
 
             searches.each do |search|
               user = bot.user(search.user_id)
-              logger.info("MATCH: #{user.username.truncate(8)} for \"#{search.query}\" on \"#{search.highlighted_query_match(post.title)}\"")
-              bot.send_message(Settings.log_channel, "MATCH: #{user.username.truncate(8)} for \"#{search.query}\" on \"#{search.highlighted_query_match(post.title)}\"") if Settings.log_channel
+              logger.match(post, search)
               user.pm.send_message(*post.to_discord_message(search))
             end
           end
         rescue Parslet::ParseFailed => error
-          logger.error("error parsing #{post.raw_title}:")
-          logger.error(error.parse_failure_cause.ascii_tree)
+          logger.parser_error(post, error)
         end
       end
     rescue => e
