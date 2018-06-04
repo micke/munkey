@@ -1,10 +1,10 @@
 class ServersController < ApplicationController
   def index
-    @servers = Server.all
+    locals servers: Server.all
   end
 
   def show
-    @server = server
+    locals server: server
   end
 
   def update_from_discord
