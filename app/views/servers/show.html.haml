@@ -31,6 +31,12 @@
                   %td
                     = link_to [@server, channel] do
                       = channel.name
+                    .float-right
+                      - if channel.gb_alerts?
+                        = fa_icon "shopping-cart",
+                          "data-toggle": "tooltip",
+                          "data-placement": "left",
+                          title: "Groupbuy announcements enabled"
 
     .col-sm
       .d-flex.border.rounded.flex-column.mb-3
