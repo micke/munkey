@@ -35,10 +35,6 @@ class User < ActiveRecord::Base
       .update!(blocked: false)
   end
 
-  def searches_count
-    searches.count
-  end
-
   def update_with_discord_user(user)
     update!(name: user.username)
   end

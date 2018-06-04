@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_193905) do
+ActiveRecord::Schema.define(version: 2018_06_04_200057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_193905) do
     t.boolean "blocked", default: false
     t.datetime "created_at", default: -> { "now()" }, null: false
     t.datetime "updated_at", default: -> { "now()" }, null: false
+    t.integer "searches_count", default: 0, null: false
   end
 
   add_foreign_key "searches", "users"

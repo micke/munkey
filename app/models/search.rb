@@ -1,5 +1,5 @@
 class Search < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: true
 
   delegate :name, :discord, to: :user, prefix: true
 
