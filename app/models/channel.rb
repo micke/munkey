@@ -31,4 +31,10 @@ class Channel < ActiveRecord::Base
   def disable_gb_alerts!
     update!(gb_alerts: false)
   end
+
+  def discord
+    @on_discord ||= BOT.channel(id)
+  rescue RuntimeError
+    nil
+  end
 end

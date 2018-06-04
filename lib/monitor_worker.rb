@@ -19,7 +19,7 @@ class MonitorWorker
         if Settings.monitoring_enabled
           if post.gb?
             Channel.receiving_gb_alerts.each do |channel|
-              bot.send_message(channel.id, *post.to_discord_message)
+              channel.send_message(*post.to_discord_message)
             end
           end
 
