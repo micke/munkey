@@ -39,3 +39,7 @@ end
 bot.command :link do |event|
   bot.invite_url
 end
+
+bot.command :raise do |event|
+  raise ArgumentError, "test"
+end

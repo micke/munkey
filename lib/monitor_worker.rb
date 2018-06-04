@@ -34,6 +34,9 @@ class MonitorWorker
         logger.parser_error(post, error)
       end
     end
+  rescue => exception
+    Raven.capture_exception(exception)
+    raise exception
   end
 
   private

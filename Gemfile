@@ -37,6 +37,8 @@ gem "font-awesome-rails", "~> 4.7"
 
 gem "concurrent-ruby", "~> 1.0"
 
+gem "sentry-raven", "~> 2.7"
+
 # Use ActiveStorage variant
 # gem "mini_magick", "~> 4.8"
 
