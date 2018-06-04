@@ -30,7 +30,7 @@ module Bot
       unless region
         "Region #{name} not found"
       else
-        discord_role = event.server.role(region.discord_id)
+        discord_role = event.server.role(region.id)
         discord_role.delete if discord_role
         region.destroy
 
@@ -54,10 +54,10 @@ module Bot
       if event.message.content =~ /\.(.+)/
         if role = event.server.regions.where(name: $1).first
           # Remove other region regions
-          existing_region_roles = event.user.roles.collect(&:id) & event.server.regions.pluck(:discord_id)
+          existing_region_roles = event.user.roles.collect(&:id) & event.server.regions.pluck(:id)
 
           # Add new region role
-          event.user.modify_roles(role.discord_id, existing_region_roles)
+          event.user.modify_roles(role.id, existing_region_roles)
           event.message.delete
         end
       end

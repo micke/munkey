@@ -20,6 +20,7 @@ class Region < ActiveRecord::Base
     update!(
       name: discord_role.name,
       color: discord_role.color.hex,
+      position: discord_role.position,
     )
   end
 
