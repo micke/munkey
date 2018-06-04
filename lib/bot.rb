@@ -16,10 +16,16 @@ require_relative "bot/server_crud"
 Settings.default :monitoring_enabled, true
 Settings.default :log_channel, nil
 
+sentry_error_reporter = -> (event, exception) {
+  Raven.extra_context event: event
+  Raven.capture_exception exception
+}
+
 BOT = Discordrb::Commands::CommandBot.new(
   token: ENV.fetch("DISCORD_TOKEN"),
   client_id: ENV.fetch("DISCORD_CLIENT_ID"),
   prefix: ".",
+  rescue: sentry_error_reporter,
 )
 
 bot = BOT
