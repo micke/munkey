@@ -17,7 +17,9 @@ Settings.default :monitoring_enabled, true
 Settings.default :log_channel, nil
 
 sentry_error_reporter = -> (event, exception) {
-  Raven.extra_context event: event
+  Raven.user_context username: event.user.username
+  Raven.tags_context channel: event.channel.name
+  Raven.extra_context content: event.content
   Raven.capture_exception exception
 }
 
