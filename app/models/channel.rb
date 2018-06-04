@@ -3,6 +3,8 @@ class Channel < ActiveRecord::Base
 
   default_scope { order("position asc") }
 
+  delegate :send_message, to: :discord
+
   def self.receiving_gb_alerts
     where(gb_alerts: true)
   end
