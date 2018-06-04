@@ -10,7 +10,7 @@ class TitleParser < Parslet::Parser
 
   rule(:location) { spaced(open)>> (us | ca | eu | other_country) >> spaced(close) }
   rule(:us) { stri("US").as(:country) >> spaced(seperator?) >> alpha2.as(:state) }
-  rule(:ca) { stri("CA").as(:country) >> spaced(seperator?) >> alpha2.as(:province) }
+  rule(:ca) { stri("CA").as(:country) >> spaced(seperator?) >> alpha2.as(:state) }
   rule(:eu) { stri("EU").as(:region) >> spaced(seperator?) >> alpha2.as(:country) }
   rule(:other_country) { alpha2.as(:country) }
 
