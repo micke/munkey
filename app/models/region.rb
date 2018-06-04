@@ -1,6 +1,8 @@
 class Region < ActiveRecord::Base
   belongs_to :server
 
+  default_scope { order("position asc") }
+
   def self.upsert!(discord_role)
     find_or_create_by(
       server_id: discord_role.server.id,
