@@ -27,7 +27,7 @@ class Server < ActiveRecord::Base
   end
 
   def discord
-    @on_discord ||= BOT.servers[id]
+    @on_discord ||= BOT.server(id)
   rescue RuntimeError
     nil
   end
