@@ -42,7 +42,7 @@ module Bot
     command :monitor, min_args: 1, description: "Adds a new search that will be monitored for new posts on r/mechmarket" do |event, *args|
       next unless User.allowed?(event.user)
 
-      user = Utils.subject(bot, event, args)
+      user = Utils.subject(event.bot, event, args)
 
       if args.empty?
         event << "#{user.mention} You need to give me a pattern to monitor for!"
@@ -66,7 +66,7 @@ module Bot
     command :unmonitor, min_args: 1, max_args: 2, description: "Removes a phrase so that it will not be monitored for new posts on r/mechmarket anymore" do |event, *args|
       next unless User.allowed?(event.user)
 
-      user = Utils.subject(bot, event, args)
+      user = Utils.subject(event.bot, event, args)
 
       id = args.join.to_i
 
@@ -88,7 +88,7 @@ module Bot
     command :monitors, description: "Lists all phrases that the bot monitors for you on r/mechmarket" do |event, *args|
       next unless User.allowed?(event.user)
 
-      user = Utils.subject(bot, event, args)
+      user = Utils.subject(event.bot, event, args)
 
       searches = User.find(user.id).searches
 
@@ -106,7 +106,7 @@ module Bot
     command :unmonitorall, description: "Removes all monitored phrases" do |event, *args|
       next unless User.allowed?(event.user)
 
-      subject = Utils.subject(bot, event, args)
+      subject = Utils.subject(event.bot, event, args)
       user = User.find(subject.id)
 
       if user.searches.any?
