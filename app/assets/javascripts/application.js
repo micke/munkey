@@ -18,6 +18,6 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(function () {
+document.addEventListener("turbolinks:load", function() {
   $('[data-toggle="tooltip"]').tooltip()
 })
