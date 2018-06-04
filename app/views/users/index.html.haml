@@ -4,7 +4,7 @@
       %th{ scope: "col"} Name
       %th{ scope: "col", style: "width:5%" } Searches
   %tbody
-    - @users.each do |user|
+    - users.each do |user|
       %tr
         %td
           = link_to user do
