@@ -3,6 +3,10 @@ class Channel < ActiveRecord::Base
 
   default_scope { order("position asc") }
 
+  def self.receiving_gb_alerts
+    where(gb_alerts: true)
+  end
+
   def self.upsert!(discord_channel)
     find_or_create_by!(
       id: discord_channel.id,
