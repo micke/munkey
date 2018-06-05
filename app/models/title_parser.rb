@@ -1,16 +1,14 @@
-# frozen_string_literal: true
-
 class TitleParser < Parslet::Parser
   root(:title)
 
   rule(:title) {
     spaced(location) >> spaced(h) >> spaced(text.as(:have)) >> spaced(w) >> spaced(text.as(:want)) |
-    spaced(other) >> any.repeat.as(:have)
+      spaced(other) >> any.repeat.as(:have)
   }
 
   rule(:text) { (spaces? >> open.absent? >> any).repeat }
 
-  rule(:location) { spaced(open)>> (us | ca | eu | other_country) >> spaced(close) }
+  rule(:location) { spaced(open) >> (us | ca | eu | other_country) >> spaced(close) }
   rule(:us) { stri("US").as(:country) >> spaced(seperator?) >> alpha2.as(:state) }
   rule(:ca) { stri("CA").as(:country) >> spaced(seperator?) >> alpha2.as(:state) }
   rule(:eu) { stri("EU").as(:region) >> spaced(seperator?) >> alpha2.as(:country) }
@@ -40,9 +38,9 @@ class TitleParser < Parslet::Parser
 
   def stri(str)
     key_chars = str.split(//)
-    key_chars.
-      collect! { |char| match["#{char.upcase}#{char.downcase}"] }.
-      reduce(:>>)
+    key_chars
+      .collect! { |char| match["#{char.upcase}#{char.downcase}"] }
+      .reduce(:>>)
   end
 
   def self.parse(string)
