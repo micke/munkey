@@ -10,16 +10,25 @@ class Search < ActiveRecord::Base
   end
 
   def description
-    m = (wants? ? "[W] " : "[H] ")
-    m += query.present? && "`#{query}`" || "**anything**"
-    m += " posted by `#{submitter}`" if submitter
+    m = "".dup
+    m << (wants? ? "[W] " : "[H] ")
+    m << query.present? && "`#{query}`" || "**anything**"
+    m << " posted by `#{submitter}`" if submitter
     m
   end
 
   def highlighted_query_match(title)
     haystack = wants? ? title.want : title.have
-    highlight = Search.find_by_sql(["SELECT ts_headline(?, query, 'StartSel=__,StopSel=__,ShortWord=1,HighlightAll=true') as title FROM searches WHERE id=?", haystack, id]).first.title
-    s = "[#{title.location}]"
+    highlight = Search.find_by_sql(
+      [
+        "SELECT ts_headline(?, query, 'StartSel=__,StopSel=__,ShortWord=1,HighlightAll=true') as title
+        FROM searches
+        WHERE id=?",
+        haystack,
+        id
+      ]
+    ).first.title
+    s = "[#{title.location}]".dup
 
     if wants?
       s << "[H] #{title.have} [W] #{highlight}"
@@ -30,16 +39,20 @@ class Search < ActiveRecord::Base
   end
 
   def self.matching(title, submitter)
-    joins(:user).
-      where("users.blocked" => false).
-      where("(
+    joins(:user)
+      .where("users.blocked" => false)
+      .where("(
               (
                 wants IS FALSE AND to_tsvector(:have) @@ query OR
                 wants IS TRUE AND to_tsvector(:want) @@ query
               ) AND (submitter ilike :submitter OR submitter IS NULL)
              ) OR query IS NULL AND submitter ilike :submitter",
-             { have: title.have, want: title.want, submitter: submitter }).
-      select("distinct on (users.id) searches.*")
+             {
+               have: title.have,
+               want: title.want,
+               submitter: submitter
+             })
+      .select("distinct on (users.id) searches.*")
   end
 
   def self.parse(args)
