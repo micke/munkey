@@ -10,8 +10,4 @@ class CreateSettingsTable < ActiveRecord::Migration[5.1]
 
     add_index :settings, :key, unique: true
   end
-
-  def down
-
-  end
 end

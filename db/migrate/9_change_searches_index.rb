@@ -2,12 +2,12 @@
 
 class ChangeSearchesIndex < ActiveRecord::Migration[5.1]
   def up
-    remove_index :searches, [:submitter, :query]
-    add_index :searches, [:submitter, :query]
+    remove_index :searches, %i[submitter query]
+    add_index :searches, %i[submitter query]
   end
 
   def down
-    remove_index :searches, [:submitter, :query]
-    add_index :searches, [:submitter, :query], unique: true
+    remove_index :searches, %i[submitter query]
+    add_index :searches, %i[submitter query], unique: true
   end
 end

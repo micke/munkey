@@ -27,7 +27,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
         ADD query tsquery
     SQL
 
-    add_index :searches, [:submitter, :query], unique: true
+    add_index :searches, %i[submitter query], unique: true
   end
 
   def down
