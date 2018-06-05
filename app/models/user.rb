@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def send_message(*args)
-    pm.send_message(args)
+    pm.send_message(*args)
   end
 
   def update_with_discord_user(user)
