@@ -9,4 +9,3 @@ class AddWantsToSearches < ActiveRecord::Migration[5.1]
     remove_column :searches, :wants
   end
 end
-
