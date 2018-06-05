@@ -23,7 +23,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_foreign_key :searches, :users
 
     execute <<-SQL
-      ALTER TABLE searches 
+      ALTER TABLE searches
         ADD query tsquery
     SQL
 

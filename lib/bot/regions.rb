@@ -22,7 +22,6 @@ module Bot
       discord_role.name = name
       region = Region.upsert!(discord_role)
 
-
       "Created region #{region.name}"
     end
 
@@ -54,7 +53,7 @@ module Bot
 
     message start_with: "." do |event|
       if event.message.content =~ /\.(.+)/
-        if role = event.server.regions.where(name: $1).first
+        if (role = event.server.regions.where(name: $1).first)
           # Remove other region regions
           existing_region_roles = event.user.roles.collect(&:id) & event.server.regions.pluck(:id)
 

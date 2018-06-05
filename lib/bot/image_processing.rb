@@ -7,7 +7,7 @@ module Bot
     extend Discordrb::EventContainer
     extend Discordrb::Commands::CommandContainer
 
-    message in: "visa-din-keeb" do |event, *args|
+    message in: "visa-din-keeb" do |event|
       next unless ImageRecognition.available?
       images = event.message.all_images
 

@@ -9,7 +9,7 @@ class Settings
       value = arguments.first
       find_or_create_by(key: var_name).update!(value: value)
     else
-      if setting = Setting.find_by(key: method_name)
+      if (setting = Setting.find_by(key: method_name))
         setting.value
       else
         super

@@ -18,7 +18,7 @@ require_relative "bot/server_crud"
 Settings.default :monitoring_enabled, true
 Settings.default :log_channel, nil
 
-sentry_error_reporter = -> (event, exception) {
+sentry_error_reporter = ->(event, exception) {
   Raven.user_context username: event.user.username
   Raven.tags_context channel: event.channel.name
   Raven.extra_context content: event.content
@@ -46,6 +46,6 @@ bot.command :botlog, Bot::ADMIN_PERMISSIONS do |event|
   "Log channel set"
 end
 
-bot.command :link do |event|
+bot.command :link do
   bot.invite_url
 end

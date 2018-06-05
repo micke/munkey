@@ -15,12 +15,12 @@ module Bot
       end
     end
 
-    command :enable, Bot::ADMIN_PERMISSIONS do |event|
+    command :enable, Bot::ADMIN_PERMISSIONS do
       Setting.monitoring_enabled = true
       "Monitoring enabled"
     end
 
-    command :disable, Bot::ADMIN_PERMISSIONS do |event|
+    command :disable, Bot::ADMIN_PERMISSIONS do
       Setting.monitoring_enabled = false
       "Monitoring disabled"
     end
@@ -37,7 +37,9 @@ module Bot
       "#{event.user.mention} Unblocked #{user}"
     end
 
-    command :monitor, min_args: 1, description: "Adds a new search that will be monitored for new posts on r/mechmarket" do |event, *args|
+    command :monitor,
+      min_args: 1,
+      description: "Adds a new search that will be monitored for new posts on r/mechmarket" do |event, *args|
       next unless User.allowed?(event.user)
 
       user = Utils.subject(event.bot, event, args)
