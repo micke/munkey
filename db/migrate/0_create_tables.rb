@@ -6,7 +6,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.bigint :id
       t.string :name
       t.boolean :blocked
-      t.timestamps null: false, default: -> { 'NOW()' }
+      t.timestamps null: false, default: -> { "NOW()" }
     end
 
     execute "ALTER TABLE users ADD PRIMARY KEY (id);"
@@ -17,7 +17,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.text :unparsed_query
       t.boolean :enabled, default: true
       t.datetime :last_trigger_at
-      t.timestamps null: false, default: -> { 'NOW()' }
+      t.timestamps null: false, default: -> { "NOW()" }
     end
 
     add_foreign_key :searches, :users

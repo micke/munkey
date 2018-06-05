@@ -5,7 +5,7 @@ class CreateSettingsTable < ActiveRecord::Migration[5.1]
     create_table :settings do |t|
       t.string :key
       t.string :value
-      t.timestamps null: false, default: -> { 'NOW()' }
+      t.timestamps null: false, default: -> { "NOW()" }
     end
 
     add_index :settings, :key, unique: true
