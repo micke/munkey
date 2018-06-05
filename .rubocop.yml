@@ -1,3 +1,22 @@
+AllCops:
+  Include:
+    - "**/config.ru"
+    - "**/Gemfile"
+    - "**/Rakefile"
+  Exclude:
+    - "bin/*"
+    - "config/**/*"
+    - "db/migrate/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "spec/fixtures/**/*"
+    - "spec/spec_helper.rb"
+    - "spec/rails_helper.rb"
+    - "tmp/**/*"
+
+Rails:
+  Enabled: true
+
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
