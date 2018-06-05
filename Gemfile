@@ -39,6 +39,8 @@ gem "concurrent-ruby", "~> 1.0"
 
 gem "sentry-raven", "~> 2.7"
 
+gem "rubocop", "~> 0.56", require: false
+
 # Use ActiveStorage variant
 # gem "mini_magick", "~> 4.8"
 
