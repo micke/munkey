@@ -13,5 +13,5 @@
         - regions.each do |region|
           %tr
             %td
-              %a{ href: polymorphic_path([@server, region]), style: "color: ##{region.color}" }
+              %a{ href: region_path(region), style: "color: ##{region.color}" }
                 = region.name

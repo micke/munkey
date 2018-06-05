@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   #
   resources :servers do
     get :update_from_discord, on: :member
-
-    resources :channels
-    resources :regions
   end
+
+  resources :channels
+  resources :regions
 
   resources :users
 

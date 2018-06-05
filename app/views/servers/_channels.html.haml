@@ -13,7 +13,7 @@
         - channels.each do |channel|
           %tr
             %td
-              = link_to [channel.server, channel] do
+              = link_to channel do
                 = channel.name
               .float-right
                 - if channel.gb_alerts?
