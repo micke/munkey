@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
 
   delegate :avatar_url, :pm, to: :discord, allow_nil: true
 
-  alias_method :send_message, :pm
-
   def self.upsert!(discord_user)
     find_or_create_by(
       id: discord_user.id,
@@ -35,6 +33,10 @@ class User < ActiveRecord::Base
   def self.unblock(discord_user)
     upsert!(discord_user)
       .update!(blocked: false)
+  end
+
+  def send_message(*args)
+    pm.send_message(args)
   end
 
   def update_with_discord_user(user)
