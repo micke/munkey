@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   delegate :avatar_url, :pm, to: :discord, allow_nil: true
 
-  alias_method :send_mesasge, :pm
+  alias_method :send_message, :pm
 
   def self.upsert!(discord_user)
     find_or_create_by(
