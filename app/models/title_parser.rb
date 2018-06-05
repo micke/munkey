@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TitleParser < Parslet::Parser
   root(:title)
 
@@ -70,7 +72,7 @@ class Title
   end
 
   def to_s
-    s = "[#{location}]"
+    s = "[#{location}]".dup
     if have && want
       s << "[H] #{have} [W] #{want}"
     else
