@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bot
   ADMIN_PERMISSIONS = { required_permissions: [:can_administrate] }
 end

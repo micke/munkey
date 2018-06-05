@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Server < ActiveRecord::Base
   has_many :regions, dependent: :destroy
   has_many :channels, dependent: :destroy

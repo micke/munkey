@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Settings
   def self.method_missing(method, *arguments, &block)
     method_name = method.to_s

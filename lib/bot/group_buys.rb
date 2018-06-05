@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bot
   module GroupBuys
     extend Discordrb::Commands::CommandContainer

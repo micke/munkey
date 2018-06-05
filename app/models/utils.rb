@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Utils
   def self.subject(bot, event, args)
     if event.user.can_administrate? && bot.parse_mention(args[0])

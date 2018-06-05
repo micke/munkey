@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateChannels < ActiveRecord::Migration[5.1]
   def up
     create_table :channels, id: false do |t|

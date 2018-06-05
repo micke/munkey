@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostLogger
   def initialize(logger, bot = nil)
     @logger = logger

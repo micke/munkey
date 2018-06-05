@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MessageExtensions
   def embedded_images
     embeds.select { |e| e.type == :image }.collect { |e| e.url }

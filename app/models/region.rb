@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Region < ActiveRecord::Base
   belongs_to :server, counter_cache: true
 

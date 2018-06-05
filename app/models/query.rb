@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Query
   attr_reader :advanced, :want, :user, :query
 

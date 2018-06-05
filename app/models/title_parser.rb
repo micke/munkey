@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TitleParser < Parslet::Parser
   root(:title)
 

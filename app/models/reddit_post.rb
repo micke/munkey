@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RedditPost < SimpleDelegator
   def title
     @title ||= TitleParser.parse(__getobj__.title)

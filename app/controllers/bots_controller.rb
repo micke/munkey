@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BotsController < ApplicationController
   def stop
     BOT.stop(false)

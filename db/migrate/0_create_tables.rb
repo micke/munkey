@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTables < ActiveRecord::Migration[5.1]
   def up
     create_table :users, id: false do |t|

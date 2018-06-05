@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemTracker
   def initialize(items)
     @stored_items = Array.new(items)

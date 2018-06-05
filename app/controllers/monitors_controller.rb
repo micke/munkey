@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MonitorsController < ApplicationController
   def run
     MONITORING_TASK.execute

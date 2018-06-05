@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChannelExtensions
   def free_up_pin
     sorted_pins = pins.sort_by(&:timestamp)

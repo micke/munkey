@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeBlockedDefault < ActiveRecord::Migration[5.1]
   def up
     change_column :users, :blocked, :boolean, default: false

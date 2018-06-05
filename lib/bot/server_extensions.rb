@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ServerExtensions
   def model
     @model ||= Server.upsert!(self)

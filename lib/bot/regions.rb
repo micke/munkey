@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bot
   module Regions
     extend Discordrb::EventContainer
