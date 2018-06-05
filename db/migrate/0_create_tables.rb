@@ -29,8 +29,4 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     add_index :searches, %i[submitter query], unique: true
   end
-
-  def down
-
-  end
 end
