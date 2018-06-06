@@ -12,7 +12,7 @@ class Search < ActiveRecord::Base
   def description
     m = "".dup
     m << (wants? ? "[W] " : "[H] ")
-    m << query.present? && "`#{query}`" || "**anything**"
+    m << (query.present? && "`#{query}`" || "**anything**")
     m << " posted by `#{submitter}`" if submitter
     m
   end
