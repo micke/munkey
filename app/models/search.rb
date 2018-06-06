@@ -5,39 +5,6 @@ class Search < ActiveRecord::Base
 
   delegate :name, to: :user, prefix: true
 
-  def discord_user
-    user.discord
-  end
-
-  def description
-    m = "".dup
-    m << (wants? ? "[W] " : "[H] ")
-    m << (query.present? && "`#{query}`" || "**anything**")
-    m << " posted by `#{submitter}`" if submitter
-    m
-  end
-
-  def highlighted_query_match(title)
-    haystack = wants? ? title.want : title.have
-    highlight = Search.find_by_sql(
-      [
-        "SELECT ts_headline(?, query, 'StartSel=__,StopSel=__,ShortWord=1,HighlightAll=true') as title
-        FROM searches
-        WHERE id=?",
-        haystack,
-        id
-      ]
-    ).first.title
-    s = "[#{title.location}]".dup
-
-    if wants?
-      s << "[H] #{title.have} [W] #{highlight}"
-    else
-      s << "[H] #{highlight} [W] #{title.want}"
-    end
-    s
-  end
-
   def self.matching(title, submitter)
     joins(:user)
       .where("users.blocked" => false)
@@ -91,5 +58,11 @@ class Search < ActiveRecord::Base
     puts failure.parse_failure_cause.ascii_tree
     search.errors.add(:query, failure.parse_failure_cause.ascii_tree)
     search
+  end
+
+  private
+
+  def discord_user
+    user.discord
   end
 end

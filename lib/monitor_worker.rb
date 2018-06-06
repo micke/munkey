@@ -27,7 +27,7 @@ class MonitorWorker
 
           searches = Search.matching(post.title, post.submitter)
 
-          searches.each do |search|
+          searches.map { |s| SearchDecorator.new(s) }.each do |search|
             logger.match(post, search)
             search.user.send_message(*post.to_discord_message(search))
           end
