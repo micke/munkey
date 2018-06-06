@@ -49,7 +49,7 @@ module Bot
         next
       end
 
-      search = User.find(user.id).searches.parse(args)
+      search = SearchDecorator.new(User.find(user.id).searches.parse(args))
 
       if Search.exists?(query: search.query, user_id: search.user_id, submitter: search.submitter)
         "#{user.mention} Already monitoring for #{search.description}"
@@ -75,7 +75,7 @@ module Bot
         next
       end
 
-      search = Search.find_by(id: id, user_id: user.id)
+      search = SearchDecorator.new(Search.find_by(id: id, user_id: user.id))
 
       unless search
         "#{user.mention} no search found with id #{id}"
@@ -94,7 +94,7 @@ module Bot
 
       if searches.any?
         event << "#{user.mention} monitored searches:"
-        searches.each do |search|
+        searches.map { |s| SearchDecorator.new(s) }.each do |search|
           event << "#{search.id}. #{search.description}"
         end
         nil
@@ -120,7 +120,7 @@ module Bot
     command :tokenize, description: "Returns the search tokenized" do |event, *args|
       next unless User.allowed?(event.user)
 
-      search = Search.parse(args)
+      search = SearchDecorator.new(Search.parse(args))
       if search.errors.any?
         search.errors.full_messages.join(", ")
       else
