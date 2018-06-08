@@ -3,7 +3,7 @@
 class User < ActiveRecord::Base
   has_many :searches
 
-  delegate :avatar_url, :pm, to: :discord, allow_nil: true
+  delegate :avatar_url, :pm, :mention, to: :discord, allow_nil: true
 
   def self.upsert!(discord_user)
     find_or_create_by(
