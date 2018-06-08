@@ -66,20 +66,16 @@ module Bot
     command :unmonitor, min_args: 1, max_args: 2, description: "Removes a phrase so that it will not be monitored for new posts on r/mechmarket anymore" do |event, *args|
       next unless User.allowed?(event.user)
 
-      user = Utils.subject(event.bot, event, args)
+      user = User.upsert!(Utils.subject(event.bot, event, args))
 
-      id = args.join.to_i
+      search_pattern = args.join(" ")
 
-      unless id
-        event << "#{user.mention} You need to give me a search id to remove"
-        next
-      end
-
-      search = SearchDecorator.new(Search.find_by(id: id, user_id: user.id))
+      search = user.searches.find_by_id_or_query(search_pattern)
 
       unless search
-        "#{user.mention} no search found with id #{id}"
+        "#{user.mention} no search found #{search_pattern}"
       else
+        search = SearchDecorator.new(search)
         search.destroy
         "#{user.mention} No longer monitoring for #{search.description}"
       end

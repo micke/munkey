@@ -5,6 +5,15 @@ class Search < ActiveRecord::Base
 
   delegate :name, to: :user, prefix: true
 
+  def self.find_by_id_or_query(id_or_query)
+    if id_or_query =~ /^(\d+)$/
+      find_by(id: $1.to_i)
+    else
+      query = Search.parse(id_or_query).query
+      find_by(query: query)
+    end
+  end
+
   def self.matching(title, submitter)
     joins(:user)
       .where("users.blocked" => false)
