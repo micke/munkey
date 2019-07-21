@@ -8,11 +8,12 @@ require_relative "bot/channel_extensions"
 require_relative "bot/message_extensions"
 require_relative "bot/server_extensions"
 
-require_relative "bot/regions"
-require_relative "bot/searches"
+require_relative "bot/channel_crud"
 require_relative "bot/group_buys"
 require_relative "bot/image_processing"
-require_relative "bot/channel_crud"
+require_relative "bot/market"
+require_relative "bot/regions"
+require_relative "bot/searches"
 require_relative "bot/server_crud"
 
 Settings.default :monitoring_enabled, true
@@ -40,6 +41,7 @@ bot.include! Bot::GroupBuys
 bot.include! Bot::ImageProcessing
 bot.include! Bot::ChannelCrud
 bot.include! Bot::ServerCrud
+bot.include! Bot::Market
 
 bot.command :botlog, Bot::ADMIN_PERMISSIONS do |event|
   Setting.log_channel = event.channel.id
