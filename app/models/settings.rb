@@ -21,6 +21,8 @@ class Settings
     unless Setting.exists?(key: method)
       self.send("#{method}=", value)
     end
+  rescue ActiveRecord::StatementInvalid
+    # noop
   end
 
   def self.respond_to_missing?(method_name, include_private = false)
