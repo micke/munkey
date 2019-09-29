@@ -7,7 +7,7 @@ class Settings
     if method_name.end_with?("=")
       var_name = method_name.sub("=", "")
       value = arguments.first
-      find_or_create_by(key: var_name).update!(value: value)
+      Setting.find_or_create_by(key: var_name).update!(value: value)
     else
       if (setting = Setting.find_by(key: method_name))
         setting.value
