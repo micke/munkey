@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.6
 MAINTAINER Micke Lisinge <me@mike.gg>
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
@@ -8,6 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 
 WORKDIR /app
 COPY Gemfile* ./
+RUN gem update bundler
 RUN bundle install
 
 COPY . ./
