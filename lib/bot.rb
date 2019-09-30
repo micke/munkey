@@ -44,7 +44,7 @@ bot.include! Bot::ServerCrud
 bot.include! Bot::Market
 
 bot.command :botlog, Bot::ADMIN_PERMISSIONS do |event|
-  Setting.log_channel = event.channel.id
+  Settings.log_channel = event.channel.id
   "Log channel set"
 end
 
