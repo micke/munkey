@@ -16,16 +16,23 @@ module Bot
       event << "Example; .#{event.server.regions.first&.name&.downcase || "stockholm"}"
     end
 
-    command :createregion, ADMIN_PERMISSIONS do |event, name|
+    command :addregion, ADMIN_PERMISSIONS do |event, name|
       next if event.server.regions.exists?(name: name)
-      discord_role = event.server.create_role
-      discord_role.name = name
-      region = Region.upsert!(discord_role)
 
-      "Created region #{region.name}"
+      if discord_role = event.server.roles.find { |r| r.name =~ /#{name}/i }
+        region = Region.upsert!(discord_role)
+
+        "Synced region #{region.name}"
+      else
+        discord_role = event.server.create_role
+        discord_role.name = name
+        region = Region.upsert!(discord_role)
+
+        "Created region #{region.name}"
+      end
     end
 
-    command :removeregion, ADMIN_PERMISSIONS do |event, name|
+    command :deleteregion, ADMIN_PERMISSIONS do |event, name|
       region = event.server.regions.find_by_name(name)
 
       unless region

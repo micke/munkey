@@ -27,7 +27,7 @@ gem "sentry-raven", "~> 2.7"
 
 gem "rubocop", "~> 0.56", require: false
 
-gem "discordrb", github: "lisinge/discordrb", branch: "fix_server_role_delete_event"
+gem "discordrb"
 
 gem "google-cloud-vision", require: "google/cloud/vision"
 gem "parslet"
@@ -42,8 +42,6 @@ end
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
-  gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", ">= 3.3.0"
 end
 

@@ -27,8 +27,8 @@ sentry_error_reporter = ->(event, exception) {
 }
 
 BOT = Discordrb::Commands::CommandBot.new(
-  token: ENV.fetch("DISCORD_TOKEN"),
-  client_id: ENV.fetch("DISCORD_CLIENT_ID"),
+  token: ENV.fetch("DISCORD_TOKEN", "1337"),
+  client_id: ENV.fetch("DISCORD_CLIENT_ID", "1337"),
   prefix: ".",
   rescue: sentry_error_reporter,
 )
