@@ -51,3 +51,8 @@ end
 bot.command :link do
   bot.invite_url
 end
+
+bot.command :stop, Bot::ADMIN_PERMISSIONS do |event|
+  event << "bye bye"
+  bot.stop
+end
