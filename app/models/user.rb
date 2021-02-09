@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: tru
 
 class User < ActiveRecord::Base
   has_many :searches
@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
   end
 
   def self.add(user)
-    create!(id: user.id, name: user.username)
+    find_or_create_by!(id: user.id).update!(name: user.username, whitelisted: true)
   end
 
   def self.allowed?(user)
-    exists?(id: user.id, blocked: false)
+    exists?(id: user.id, blocked: false, whitelisted: true)
   end
 
   def self.blocked?(user)

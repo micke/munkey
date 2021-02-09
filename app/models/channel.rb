@@ -2,6 +2,7 @@
 
 class Channel < ActiveRecord::Base
   belongs_to :server, counter_cache: true
+  belongs_to :delete_message_log_channel, optional: true, class_name: "Channel"
 
   default_scope { order("position asc") }
 

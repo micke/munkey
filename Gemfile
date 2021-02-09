@@ -4,6 +4,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "rails", "~> 5.2.0"
+gem "rails-i18n", "~> 5.1"
 
 gem "dotenv-rails", "~> 2.4", groups: %i[development test]
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_200057) do
+ActiveRecord::Schema.define(version: 2021_02_09_224349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2018_06_04_200057) do
     t.datetime "updated_at", default: -> { "now()" }, null: false
     t.string "name"
     t.integer "position"
+    t.boolean "market", default: false
+    t.bigint "delete_message_log_channel_id"
+    t.bigint "hours_required_to_post"
+  end
+
+  create_table "messages", id: :bigint, default: nil, force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", default: -> { "now()" }, null: false
+    t.datetime "updated_at", default: -> { "now()" }, null: false
   end
 
   create_table "regions", force: :cascade do |t|
@@ -58,6 +68,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_200057) do
     t.datetime "created_at", default: -> { "now()" }, null: false
     t.datetime "updated_at", default: -> { "now()" }, null: false
     t.integer "searches_count", default: 0, null: false
+    t.boolean "whitelisted", default: false
   end
 
   add_foreign_key "searches", "users"
