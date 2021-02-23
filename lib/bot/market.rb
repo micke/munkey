@@ -64,7 +64,6 @@ module Bot
       next unless channel&.market?
 
       User.upsert!(event.author)
-      Message.create!(id: event.message.id, content: event.message.content, author_id: event.author.id)
 
       unless event.content =~ AD_PATTERN
         event.author.pm <<~END
@@ -80,6 +79,8 @@ module Bot
         event.bot.send_message(Settings.log_channel, <<~END) if Settings.log_channel
           #{event.author.mention} in #{event.channel.mention}: #{event.content}
         END
+      else
+        Message.create!(id: event.message.id, content: event.message.content, author_id: event.author.id)
       end
 
       if event.content =~ PAYMENT_SERVICE_PATTERN && event.content !~ MONETARY_PATTERN
