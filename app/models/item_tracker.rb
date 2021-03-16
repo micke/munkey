@@ -18,6 +18,6 @@ class ItemTracker
   attr_reader :stored_items
 
   def cleanup
-    stored_items.shift(stored_items.count - 50) if stored_items.count > 50
+    stored_items.shift(stored_items.count - 300) if stored_items.count > 300
   end
 end
