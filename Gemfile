@@ -24,6 +24,9 @@ gem "sass-rails", "~> 5.0"
 
 gem "concurrent-ruby", "~> 1.0"
 
+gem "faraday"
+gem "typhoeus"
+
 gem "sentry-raven", "~> 2.7"
 
 gem "rubocop", "~> 0.56", require: false

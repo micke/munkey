@@ -45,13 +45,15 @@ class MonitorWorker
 
   attr_reader :bot
 
-  def search_uri
-    "https://www.reddit.com/r/mechmarket/new.rss"
-  end
-
   def fetch_posts
-    SimpleRSS.parse(open(search_uri, "User-Agent" => "redditnotifier/1.0")).items.map do |item|
+    SimpleRSS.parse(connection.get("/r/mechmarket/new.rss").body).items.map do |item|
       RedditPost.new(item)
     end.sort_by(&:updated)
+  end
+  
+  def connection
+    @connection ||= Faraday.new(url: "https://www.reddit.com", headers: {"User-Agent" => "sweredditnotifier/1.0"}) do |faraday|
+      faraday.adapter :typhoeus
+    end
   end
 end
