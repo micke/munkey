@@ -38,7 +38,6 @@ class MonitorWorker
     end
   rescue => exception
     Raven.capture_exception(exception)
-    raise exception
   end
 
   private
