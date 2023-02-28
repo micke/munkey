@@ -15,7 +15,7 @@ module Bot
           puts "STATE: #{event.author.joined_at <= loyalty_role.required_age.years.ago}"
           next unless event.author.joined_at <= loyalty_role.required_age.years.ago
 
-          event.user.add_role(role.id) unless event.user.role?(role.id)
+          event.user.add_role(loyalty_role.id) unless event.user.role?(loyalty_role.id)
         end
     end
 
