@@ -2,6 +2,7 @@
 
 class Server < ActiveRecord::Base
   has_many :regions, dependent: :destroy
+  has_many :loyalty_roles, dependent: :destroy
   has_many :channels, dependent: :destroy
 
   def self.upsert!(discord_server)
