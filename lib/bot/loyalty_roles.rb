@@ -20,6 +20,8 @@ module Bot
     end
 
     command :addloyaltyrole, ADMIN_PERMISSIONS do |event, name, required_age|
+      puts "NAME: #{name}"
+      puts "NAMES: #{event.server.loyalty_roles.map(&:name)}"
       if discord_role = event.server.loyalty_roles.find { |r| r.name =~ /#{name}/i }
         role = LoyaltyRole.upsert!(discord_role)
         role.update!(required_age: required_age.to_i)
