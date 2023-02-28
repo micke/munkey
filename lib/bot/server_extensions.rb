@@ -6,6 +6,7 @@ module ServerExtensions
   end
 
   delegate :regions, to: :model
+  delegate :loyalty_roles, to: :model
 end
 
 Discordrb::Server.include(ServerExtensions)
