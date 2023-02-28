@@ -6,13 +6,12 @@ module Bot
     extend Discordrb::Commands::CommandContainer
 
     CHECK_AND_ADD_ROLE = ->(event) do
+      return unless event.author.respond_to?(:joined_at)
+
       event
         .server
         .loyalty_roles
         .each do |loyalty_role|
-          puts "JOINED: #{event.author.joined_at}"
-          puts "REQ: #{loyalty_role.required_age.years.ago}"
-          puts "STATE: #{event.author.joined_at <= loyalty_role.required_age.years.ago}"
           next unless event.author.joined_at <= loyalty_role.required_age.years.ago
 
           event.user.add_role(loyalty_role.id) unless event.user.role?(loyalty_role.id)
@@ -20,9 +19,7 @@ module Bot
     end
 
     command :addloyaltyrole, ADMIN_PERMISSIONS do |event, name, required_age|
-      puts "NAME: #{name}"
-      puts "NAMES: #{event.server.loyalty_roles.map(&:name)}"
-      if discord_role = event.server.loyalty_roles.find { |r| r.name =~ /#{name}/i }
+      if discord_role = event.server.roles.find { |r| r.name =~ /#{name}/i }
         role = LoyaltyRole.upsert!(discord_role)
         role.update!(required_age: required_age.to_i)
 
