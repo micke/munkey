@@ -10,7 +10,7 @@ module Bot
         .server
         .loyalty_roles
         .each do |loyalty_role|
-          next unless event.author.joined_at <= loyalty_roles.required_age.years.ago
+          next unless event.author.joined_at <= loyalty_role.required_age.years.ago
 
           event.user.add_role(role.id) unless event.user.role?(role.id)
         end
