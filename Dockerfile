@@ -1,5 +1,4 @@
 FROM ruby:2.6.6
-MAINTAINER Micke Lisinge <me@mike.gg>
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get update \

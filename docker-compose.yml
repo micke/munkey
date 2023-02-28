@@ -1,0 +1,29 @@
+version: "3"
+services:
+  server:
+    build:
+      context: .
+    environment:
+      - "DB_HOST: db"
+      - "DB_PORT: 5432"
+    command: bundle exec rails s -b '0.0.0.0' -p 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    environment:
+      - "POSTGRES_USER=mkswe"
+      - "POSTGRES_PASSWORD=password"
+      - "POSTGRES_DB=mkswe"
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  db: {}

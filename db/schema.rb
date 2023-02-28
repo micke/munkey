@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_02_09_224349) do
     t.integer "position"
     t.boolean "market", default: false
     t.bigint "delete_message_log_channel_id"
-    t.bigint "hours_required_to_post"
+    t.bigint "hours_required_to_post", default: 0
   end
 
   create_table "messages", id: :bigint, default: nil, force: :cascade do |t|
