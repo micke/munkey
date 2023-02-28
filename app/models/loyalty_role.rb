@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LoyaltyRole < ActiveRecord::Base
-  belongs_to :server, counter_cache: true
+  belongs_to :server
 
   def self.upsert!(discord_role)
     find_or_create_by(
