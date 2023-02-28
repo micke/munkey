@@ -10,6 +10,9 @@ module Bot
         .server
         .loyalty_roles
         .each do |loyalty_role|
+          puts "JOINED: #{event.author.joined_at}"
+          puts "REQ: #{loyalty_role.required_age.years.ago}"
+          puts "STATE: #{event.author.joined_at <= loyalty_role.required_age.years.ago}"
           next unless event.author.joined_at <= loyalty_role.required_age.years.ago
 
           event.user.add_role(role.id) unless event.user.role?(role.id)
