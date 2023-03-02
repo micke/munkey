@@ -4,8 +4,7 @@ services:
     build:
       context: .
     environment:
-      - "DB_HOST: db"
-      - "DB_PORT: 5432"
+      - "DATABASE_URL=postgres://mkswe:password@db/mkswe"
     command: bundle exec rails s -b '0.0.0.0' -p 3000
     ports:
       - 3000:3000
